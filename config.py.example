@@ -1,0 +1,21 @@
+""" Project settings file """
+
+
+class Config(object):
+	HOST = "0.0.0.0"
+	PORT = 5000
+	THREADED = False				# Allows multithreading.
+	DEBUG = True					# Debug mode. Do not allow in production.
+	MONGO_URI = <MONGO_URI>
+	TG_TOKEN = <TG_TOKEN>
+	WEBHOOK_HOST = <WEBHOOK_HOST>
+	WEBHOOK_PORT = 8443
+	WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
+	WEBHOOK_URL_PATH = "/%s/" % (TG_TOKEN)
+	WEBHOOK_LISTEN = '0.0.0.0'
+	WEBHOOK_SSL_CERT = './webhook_cert.pem'  # Path to the ssl certificate
+	WEBHOOK_SSL_PRIV = './webhook_pkey.pem'  # Path to the ssl private key
+	QUART_URL = 'http://quart-server:8000'
+  TG_API_ID = <TG_API_ID>
+	TG_API_HASH = <TG_API_HASH>
+	phone = <phone>		# for connectin to TG

@@ -1,0 +1,10 @@
+FROM python:3.8.1-slim-buster
+
+# set work directory
+WORKDIR /usr/src/app
+
+# install dependencies
+RUN pip install --upgrade pip
+COPY ./data/sniff_quart_server/requirements.txt /usr/src/app/requirements.txt
+COPY config.py /usr/src/app/config.py
+RUN pip install -r requirements.txt

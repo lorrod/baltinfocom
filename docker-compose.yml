@@ -1,0 +1,83 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:1.15-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    networks:
+      - bridge
+#    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+#  entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  quart-server:
+    build:
+      dockerfile: Dockerfile_quart
+      context: .
+    ports:
+      - "8000:8000"
+      - "23456:23456"
+    command: python quart_telethon.py
+    volumes:
+      - ./data/sniff_quart_server:/usr/src/app/
+    networks:
+      - bridge
+
+  flask-server:
+    build:
+      dockerfile: Dockerfile_web
+      context: .
+    command: python run.py
+    volumes:
+      - ./data/web_flask_server:/usr/src/app/
+    networks:
+      - bridge
+
+  tg-server:
+    build:
+      dockerfile: Dockerfile_bot
+      context: .
+    command: python run.py
+    volumes:
+      - ./data/telegram_bot:/usr/src/app/
+    ports:
+      - "8443:8443"
+    networks:
+      - bridge
+
+  mongodb:
+    image: mongo
+    volumes:
+      - ./mongodata:/data/db
+      - ./data_dump:/dump
+    ports:
+      - 27017:27017
+    networks:
+      - bridge
+
+
+volumes:
+  mongodata:
+
+networks:
+  bridge:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.19.1.0/16
+        gateway: 172.19.1.1
+        aux_addresses:
+          nginx: 172.19.1.2
+          flask-server: 172.19.1.3
+          tg-server: 172.19.1.4
+          mongodb: 172.19.1.6
+          quart-server: 172.19.1.7

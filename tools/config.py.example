@@ -1,0 +1,8 @@
+
+
+""" Project settings file """
+
+class Config(object):
+
+	TG_API_ID = "TG_API_ID"
+	TG_API_HASH = "TG_API_HASH"

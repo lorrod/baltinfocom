@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+body{
+  padding: 20px;
+  background-color: #121212;
+  text-align: center;
+}
+
+h1 {
+  border-right: solid 3px rgba(0,255,0,.75);
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 28px;
+  color: rgba(255,255,255,.70);
+  margin: 0 auto;
+}
+
+/* Animation */
+h1 {
+  animation: animated-text 4s steps(29,end) 1s 1 normal both,
+             animated-cursor 600ms steps(29,end) infinite;
+}
+
+p {
+  white-space: nowrap;
+  overflow: hidden;
+  white-space: initial;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 20px;
+  color: rgba(200,200,200,.70);
+  margin: 20;
+}
+
+
+input {
+  margin-bottom: 5px;
+  text-align: center;
+  color: green;
+  min-width: 400px;
+  height: 50px;
+}
+
+
+.wide_but {
+  margin-bottom: 5px;
+  margin-left:
+  transition-duration: 0.4s;
+  min-width: 408px;
+  height: 53px;
+}
+
+button:hover {
+  color: #707070; /* Green */
+}
+
+.div_new_input {
+  margin-left: 2.5px;
+  margin-right: 2.5px;
+}
+/* text animation */
+
+.modal {
+  background-color: gray;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+@keyframes animated-text{
+  from{width: 0;}
+  to{width: 472px;}
+}
+
+/* cursor animations */
+
+@keyframes animated-cursor{
+  from{border-right-color: rgba(0,255,0,.75);}
+  to{border-right-color: transparent;}
+}

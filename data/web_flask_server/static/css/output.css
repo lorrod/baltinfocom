@@ -1,0 +1,24 @@
+
+
+body{
+  padding: 20px;
+  background-color: #121212;
+  text-align: center;
+}
+
+button {
+  margin-bottom: 5px;
+  margin-left:
+  transition-duration: 0.4s;
+  min-width: 408px;
+  font-size: 18px;
+  height: 53px;
+}
+
+button:hover {
+  color: #707070; /* Green */
+}
+
+p, h1 {
+  color:white;
+}

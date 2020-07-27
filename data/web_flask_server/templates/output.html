@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="static/css/output.css">
+ </head>
+ <body>
+  {% if user_matches %}
+  <button type="button" onclick="back()" name="button">Вернуться назад</button>
+    <h1>Результат анализа групп: </h1>
+      {% for user_data in user_matches %}
+            <p>{{ user_data["name"] }} (@{{ user_data["nickname"] }}) - {{ user_data["groups"] }}</p>
+      {% endfor %}
+    {% else %}
+        <p>Ошибка во время передачи данных</p>
+    {% endif %}
+ </body>
+	 	<script src="static/js/output.js"></script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+ </head>
+ <body>
+  <!-- Комментарий -->
+	<h1>Введите url telegram-каналов</h1>
+  <p>Поиск пользователей с 2 и более подписками</p>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+            <p style="color:red;">{{ message }}</p>
+            {% if category == "no_auth" %}
+              <button type="button" name="button" onclick="request_code()">Авторизоваться</button>
+            {% endif %}
+        {% endfor %}
+      {% endif %}
+  {% endwith %}
+  <p id="alert" style="color:red;">{{ message }}</p>
+  <div class="inputs" id="inputs_div">
+    <input type="text" class="url_input" value="https://t.me/leadersofdigital">
+  	<input type="text" class="url_input" value="greedygame">
+  </div>
+	<button type="button" class="add_input wide_but" onclick="add_input()" name="button">Добавить еще один канал</button>
+	<button type="button" class="start_search wide_but" onclick="send_data()" name="button">Начать анализ</button>
+  <br>
+
+
+  <div class="modal" id="auth" tabindex="-1" role="dialog" style="display: none;">
+      <h3>Напишите @lorrodx для получения пароля</h3>
+      <div class="modal-body">
+					<p id="warning"></p>
+	        <input type="text" id="password">
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="hide_modal()">Отменить</button>
+        <button type="button" onclick="send_pass()">Авторизоваться</button>
+      </div>
+    </div>
+
+ </body>
+	 	<script src="static/js/main.js"></script>
+</html>
